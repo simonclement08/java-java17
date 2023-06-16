@@ -34,16 +34,20 @@ public class Stream_07_Test {
         return fastest;
     }
 
-    // TODO créer une fonction List<Pizza> -> List<Pizza>
-    // TODO seules les pizzas ayant un prix >= 1000 sont conservées
-    Function<List<Pizza>, List<Pizza>> filterPizza = null;
+    // créer une fonction List<Pizza> -> List<Pizza>
+    // seules les pizzas ayant un prix >= 1000 sont conservées
+    Function<List<Pizza>, List<Pizza>> filterPizza = pizzas -> pizzas.stream()
+            .filter(pizza -> pizza.getPrice() >= 1000)
+            .collect(Collectors.toList());;
 
-    // TODO créer une fonction List<Pizza> -> List<Pizza>
-    // TODO seules les pizzas ayant un prix >= 1000 sont conservées
-    // TODO .parallel()
-    Function<List<Pizza>, List<Pizza>> parallelFilterPizza = null;
+    // créer une fonction List<Pizza> -> List<Pizza>
+    // seules les pizzas ayant un prix >= 1000 sont conservées
+    // .parallel()
+    Function<List<Pizza>, List<Pizza>> parallelFilterPizza = pizzas -> pizzas.parallelStream()
+            .filter(pizza -> pizza.getPrice() >= 1000)
+            .collect(Collectors.toList());;
 
-    // TODO exécuter le test pour visualiser le temps d'exécution
+    // exécuter le test pour visualiser le temps d'exécution
     @Test
     public void test_arraylist_vs_linkedlist() throws Exception {
         arraylist_vs_linkedlist(filterPizza);
@@ -55,7 +59,7 @@ public class Stream_07_Test {
     // INFO: linkedList=21 ms
 
 
-    // TODO exécuter le test pour visualiser le temps d'exécution
+    // exécuter le test pour visualiser le temps d'exécution
     @Test
     public void test_parallel_arraylist_vs_linkedlist() throws Exception {
         arraylist_vs_linkedlist(parallelFilterPizza);
